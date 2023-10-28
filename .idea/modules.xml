@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/search-java.iml" filepath="$PROJECT_DIR$/search-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dblp-search-engine.iml" filepath="$PROJECT_DIR$/dblp-search-engine.iml" />
     </modules>
   </component>
 </project>
