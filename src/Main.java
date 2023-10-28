@@ -3,7 +3,6 @@ import model.DBLP;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryparser.classic.ParseException;
-import org.apache.lucene.queryparser.flexible.core.QueryNodeException;
 import org.xml.sax.SAXException;
 import parser.DBLPParser;
 import searcher.DBLPSearcher;
