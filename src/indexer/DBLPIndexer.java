@@ -38,6 +38,7 @@ public class DBLPIndexer {
         int decileCount = 0;
         int indexCount = 0;
         long indexStartTime = System.nanoTime();
+        long decileStartTime = indexStartTime;
         for (Article article : dblp.getArticles()) {
             if (article.getTitle() == null || article.getVenue() == null) {
                 continue;
@@ -56,14 +57,23 @@ public class DBLPIndexer {
             indexCount++;
             if (indexCount == decile) {
                 long currentTime = System.nanoTime();
-                System.out.printf("[INDEX] Decile #%d index time = %f seconds\n", ++decileCount, (currentTime - indexStartTime) / 1000000000.0);
+                System.out.printf(
+                        "[INDEX] Decile #%d index time: %f seconds, total elapsed time: %f seconds\n",
+                        ++decileCount,
+                        (currentTime - decileStartTime) / 1000000000.0,
+                        (currentTime - indexStartTime) / 1000000000.0);
                 indexCount = 0;
-                indexStartTime = currentTime;
+                decileStartTime = currentTime;
             }
         }
 
         if (decileCount != 10) {
-            System.out.printf("[INDEX] Decile #%d index time = %f seconds\n", ++decileCount, (System.nanoTime() - indexStartTime) / 1000000000.0);
+            long currentTime = System.nanoTime();
+            System.out.printf(
+                    "[INDEX] Decile #%d index time: %f seconds, total elapsed time: %f seconds\n",
+                    ++decileCount,
+                    (currentTime - decileStartTime) / 1000000000.0,
+                    (currentTime - indexStartTime) / 1000000000.0);
         }
 
         indexWriter.close();
