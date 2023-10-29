@@ -55,10 +55,11 @@ public class Main {
         } else {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter how many maximum relevant documents you want to fetch:");
-            int topN = scanner.nextInt();
+            String strTopN = scanner.nextLine();
+            int topN = Integer.parseInt(strTopN);
             while (true) {
                 System.out.println("Enter your search query below (input \"exit\" to stop the application):");
-                String query = scanner.next();
+                String query = scanner.nextLine();
                 if (Objects.equals("exit", query)) {
                     break;
                 }
