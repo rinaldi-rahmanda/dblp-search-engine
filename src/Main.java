@@ -1,7 +1,7 @@
 import indexer.DBLPIndexer;
 import model.DBLP;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.xml.sax.SAXException;
 import parser.DBLPParser;
@@ -19,7 +19,7 @@ public class Main {
         String indexPath = "resources/index";
         String rawFilePath = "resources/dblp.xml";
 
-        Analyzer analyzer = new StandardAnalyzer();
+        Analyzer analyzer = new EnglishAnalyzer();
 
         System.out.println("Initializing DBLP search engine...");
         Path path = Paths.get(indexPath);
