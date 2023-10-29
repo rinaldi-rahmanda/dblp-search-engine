@@ -15,6 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {
@@ -49,6 +51,21 @@ public class Main {
             List<String> results = searcher.search(args[0], topN);
             for (String result : results) {
                 System.out.println(result);
+            }
+        } else {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter how many maximum relevant documents you want to fetch:");
+            int topN = scanner.nextInt();
+            while (true) {
+                System.out.println("Enter your search query below (input \"exit\" to stop the application):");
+                String query = scanner.next();
+                if (Objects.equals("exit", query)) {
+                    break;
+                }
+                List<String> results = searcher.search(query, topN);
+                for (String result : results) {
+                    System.out.println(result);
+                }
             }
         }
 
