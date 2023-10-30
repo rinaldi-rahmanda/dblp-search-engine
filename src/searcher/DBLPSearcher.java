@@ -63,7 +63,6 @@ public class DBLPSearcher {
 
     public List<String> similarDocs(int docID) throws ParseException, IOException {
         Document sourceDoc = reader.document(docID);
-        System.out.println(sourceDoc.get("title"));
 
         TopDocs topDocs = searcher.search(parser.parse(QueryParser.escape(sourceDoc.get("title"))), 11);
 
