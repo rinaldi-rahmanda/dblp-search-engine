@@ -50,7 +50,7 @@ public class DBLPIndexer {
                 document.add(new TextField(DOC_AUTHOR, author, Field.Store.YES));
             }
             document.add(new TextField(DOC_VENUE, article.getVenue(), Field.Store.YES));
-            document.add(new TextField(DOC_PUB_TYPE, article.getPublicationType(), Field.Store.NO));
+            document.add(new StringField(DOC_PUB_TYPE, article.getPublicationType(), Field.Store.NO));
             document.add(new IntPoint(DOC_YEAR, article.getYear()));
             document.add(new StringField(DOC_S_YEAR, String.valueOf(article.getYear()), Field.Store.YES));
             indexWriter.addDocument(document);
