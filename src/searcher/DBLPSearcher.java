@@ -69,7 +69,7 @@ public class DBLPSearcher {
 
         long startTime = System.nanoTime();
         TopDocs topDocs = searcher.search(parser.parse(QueryParser.escape(sourceDoc.get("title"))), 11);
-        System.out.printf("Search duration: %f seconds\n", System.nanoTime() - startTime);
+        System.out.printf("Search duration: %f seconds\n", (System.nanoTime() - startTime)  / 1000000000.0);
 
         List<String> results = new ArrayList<>();
         int rank = 0;
