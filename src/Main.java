@@ -85,15 +85,6 @@ public class Main {
             }
         }
 
-        /* TODO IMPLEMENT NO 4
-            plan: maybe add extra input for similarity (input hehe for similar document lookup)
-            then get user to input docID
-            then search for similarities to the docID's title
-            maybe exclude docID itself
-        */
-
-
-
         analyzer.close();
     }
 }
