@@ -56,6 +56,7 @@ public class DBLPIndexer {
             indexWriter.addDocument(document);
             indexCount++;
             if (indexCount == decile) {
+                indexWriter.commit();
                 long currentTime = System.nanoTime();
                 System.out.printf(
                         "[INDEX] Decile #%d index time: %f seconds, total elapsed time: %f seconds\n",
@@ -68,6 +69,7 @@ public class DBLPIndexer {
         }
 
         if (decileCount != 10) {
+            indexWriter.commit();
             long currentTime = System.nanoTime();
             System.out.printf(
                     "[INDEX] Decile #%d index time: %f seconds, total elapsed time: %f seconds\n",
