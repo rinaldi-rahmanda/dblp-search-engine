@@ -40,7 +40,10 @@ public class DBLPSearcher {
     }
     public List<String> search(String queryString, int topN) throws ParseException, IOException {
         Query query = parser.parse(queryString);
+
+        long startTime = System.nanoTime();
         TopDocs topDocs = searcher.search(query, topN);
+        System.out.printf("Search duration: %f seconds\n", (System.nanoTime() - startTime)  / 1000000000.0);
 
         List<String> results = new ArrayList<>();
         for (int rank = 0; rank < topDocs.scoreDocs.length; rank++) {
@@ -64,7 +67,9 @@ public class DBLPSearcher {
     public List<String> similarDocs(int docID) throws ParseException, IOException {
         Document sourceDoc = reader.document(docID);
 
+        long startTime = System.nanoTime();
         TopDocs topDocs = searcher.search(parser.parse(QueryParser.escape(sourceDoc.get("title"))), 11);
+        System.out.printf("Search duration: %f seconds\n", System.nanoTime() - startTime);
 
         List<String> results = new ArrayList<>();
         int rank = 0;
