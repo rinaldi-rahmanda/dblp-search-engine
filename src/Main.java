@@ -58,17 +58,41 @@ public class Main {
             String strTopN = scanner.nextLine();
             int topN = Integer.parseInt(strTopN);
             while (true) {
-                System.out.println("Enter your search query below (input \"exit\" to stop the application):");
+                System.out.println("Enter your search query below (\"exit\" to stop the application, \"simi\" to run similar documents search):");
                 String query = scanner.nextLine();
                 if (Objects.equals("exit", query)) {
                     break;
                 }
+
+                if (Objects.equals("simi", query)) {
+                    System.out.println("Enter the Doc ID for the document you want to find similar documents to:");
+                    String strDocID = scanner.nextLine();
+                    int docID = Integer.parseInt(strDocID);
+
+                    System.out.printf("Similar documents to %d:\n", docID);
+                    List<String> results = searcher.similarDocs(docID);
+                    for (String result : results) {
+                        System.out.println(result);
+                    }
+
+                    continue;
+                }
+
                 List<String> results = searcher.search(query, topN);
                 for (String result : results) {
                     System.out.println(result);
                 }
             }
         }
+
+        /* TODO IMPLEMENT NO 4
+            plan: maybe add extra input for similarity (input hehe for similar document lookup)
+            then get user to input docID
+            then search for similarities to the docID's title
+            maybe exclude docID itself
+        */
+
+
 
         analyzer.close();
     }

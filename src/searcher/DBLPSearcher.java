@@ -48,13 +48,42 @@ public class DBLPSearcher {
             Document doc = reader.document(scoreDoc.doc);
 
             results.add(String.format(
-                    "(%d) [Doc ID: %d, Match Score: %.04f] %s by %s, published %s",
+                    "(%d) [Doc ID: %d, Match Score: %.04f] %s by %s, published %s in %s",
                     rank + 1,
                     scoreDoc.doc,
                     scoreDoc.score,
                     doc.getField("title").stringValue(),
                     Arrays.stream(doc.getFields("author")).map(IndexableField::stringValue).collect(Collectors.joining(", ")),
-                    doc.getField("year").stringValue()));
+                    doc.getField("year").stringValue(),
+                    doc.getField("venue").stringValue()));
+        }
+
+        return results;
+    }
+
+    public List<String> similarDocs(int docID) throws ParseException, IOException {
+        Document sourceDoc = reader.document(docID);
+        System.out.println(sourceDoc.get("title"));
+
+        TopDocs topDocs = searcher.search(parser.parse(QueryParser.escape(sourceDoc.get("title"))), 11);
+
+        List<String> results = new ArrayList<>();
+        int rank = 0;
+        for (ScoreDoc scoreDoc : topDocs.scoreDocs) {
+            if (scoreDoc.doc == docID) {
+                continue;
+            }
+            Document doc = reader.document(scoreDoc.doc);
+
+            results.add(String.format(
+                    "(%d) [Doc ID: %d, Match Score: %.04f] %s by %s, published %s in %s",
+                    ++rank,
+                    scoreDoc.doc,
+                    scoreDoc.score,
+                    doc.getField("title").stringValue(),
+                    Arrays.stream(doc.getFields("author")).map(IndexableField::stringValue).collect(Collectors.joining(", ")),
+                    doc.getField("year").stringValue(),
+                    doc.getField("venue").stringValue()));
         }
 
         return results;
