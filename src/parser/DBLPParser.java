@@ -3,7 +3,6 @@ package parser;
 import handler.DBLPHandler;
 import model.DBLP;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
